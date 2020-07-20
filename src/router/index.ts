@@ -10,7 +10,16 @@ Vue.use(VueRouter)
     name: 'Home',
     component: Home,
     children: [
-      {path: '/index', name:'Index', component: ()=> import('@/views/index/index.vue')},
+      {
+        path: '/index', 
+        name:'Index', 
+        component: ()=> import('@/views/index/index.vue'),
+        redirect:'/index/recomd',
+        children: [
+          {path: 'recomd', name:'Recomd', component: ()=> import('@/views/index/components/Recomd.vue')},
+          {path: 'follow', name:'Follow', component: ()=> import('@/views/index/components/Follow.vue')},
+        ]
+      },
       {path: '/city', name:'City', component: ()=> import('@/views/city/index.vue')},
       {path: '/message', name:'Message', component: ()=> import('@/views/message/index.vue')},
       {path: '/me', name:'Me', component: ()=> import('@/views/me/index.vue')},

@@ -1,18 +1,27 @@
 <template>
-    <div id="me">首页</div>
+    <div class="index">
+        <Header />
+        <router-view/>
+    </div>
 </template>
 <script lang="ts">
 import {Vue,Component} from 'vue-property-decorator'
+import Header from './components/Header.vue'
 
 @Component({
-    name: 'Index'
+    name: 'Index',
+    components: {
+        Header
+    }
 })
 export default class Index extends Vue{
 
 }
 </script>
 <style lang="less" scoped>
-#me{
+.index{
+    width: 100%;
+    height: 100%;
     color: #fff;
 }
 </style>
