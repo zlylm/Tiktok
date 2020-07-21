@@ -22,6 +22,11 @@ export default class Header extends Vue{
     font-size: 0.15rem;
     text-align: center;
     box-sizing: border-box;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
     .scan{
         font-size: 0.26rem;
         float: left;

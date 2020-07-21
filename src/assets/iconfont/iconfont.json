@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "8571264",
+      "name": "抖音",
+      "font_class": "tubiaozhizuomoban",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "9850885",
+      "name": "消 息",
+      "font_class": "xiaoxi",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "11447715",
+      "name": "心 爱心",
+      "font_class": "xinaixin",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "14760515",
+      "name": "转发",
+      "font_class": "forward",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
       "icon_id": "8745159",
       "name": "搜索",
       "font_class": "sousuo",

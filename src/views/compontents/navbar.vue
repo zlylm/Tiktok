@@ -12,6 +12,9 @@
 <script lang="ts">
 import {Vue,Component} from 'vue-property-decorator'
 
+@Component({
+    
+})
 export default class Navigation extends Vue{
 
 }
@@ -20,17 +23,18 @@ export default class Navigation extends Vue{
 <style lang="less" scoped>
 #nav{
     width: 100%;
-    height: 0.6rem;
+    height: 0.5rem;
     position: fixed;
     bottom: 0;
     left: 0;
     border-top: solid 0.01rem rgba(255, 255, 255, 0.3);
     background-color: transparent;
+    z-index: 99;
     .nav-item{
         width: 20%;
         text-align: center;
         height: 100%;
-        line-height: 0.6rem;
+        line-height: 0.5rem;
         float: left;
         font-size: 0.15rem;
         color: @fontColor;
