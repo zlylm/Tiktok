@@ -1,8 +1,8 @@
 <template>
     <div id="Recomd">
         <swiper class="swiper" :options="swiperOption" @slideChange="slideChange">
-            <swiper-slide class="item" v-for="(item,index) of videoList" :key="index">
-                <my-video v-if="index==swiperIndex" :param="item" :swiperIndex="swiperIndex" :selfIndex="index"></my-video>
+            <swiper-slide ref="videos" class="item" v-for="(item,index) of videoList" :key="index">
+                <my-video :param="item" :swiperIndex="swiperIndex" :selfIndex="index"></my-video>
                 <Left />
                 <Right />
             </swiper-slide>
@@ -15,6 +15,7 @@ import { Swiper, SwiperSlide} from 'vue-awesome-swiper'
 import MyVideo from './MyVideo.vue'
 import Left from './Left.vue'
 import Right from './Right.vue'
+
 @Component({
     name: 'Recomd',
     components: {
@@ -30,6 +31,11 @@ export default class Recomd extends Vue{
     private swiperOption = {
         direction:'vertical', //滑动方向
         autoHeight: true, //高度随内容变化
+         on:{
+            tap: (event: any)=> {
+                this.videos(event.activeIndex)
+            },
+        },
     }
     // 视频数据
     private videoList = [
@@ -42,6 +48,10 @@ export default class Recomd extends Vue{
     // 视频切换
     public slideChange (e: any) {
         this.swiperIndex = e.activeIndex || 0
+    }
+    // 点击屏幕 播放视频
+    public videos (index: any) {
+        (((this.$refs.videos as any)[index] as any) as any).$children[0].clickVideo()
     }
 }
 </script>
