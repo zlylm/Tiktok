@@ -1,5 +1,5 @@
 <template>
-    <video-player ref="videoPlayer" class="videoPlayer" :options="playerOptions"></video-player>
+    <video-player ref="videoPlayer" class="videoPlayer" :playsinline="true" :options="playerOptions"></video-player>
 </template>
 <script lang="ts">
 import {Vue,Component,Prop,Watch} from 'vue-property-decorator'
@@ -17,7 +17,7 @@ export default class MyVideo extends Vue{
 
     // 播放器配置
     private playerOptions = {
-        controls:false,//隐藏控制台
+        controls:true,//隐藏控制台
         autoplay: true, // 播放器准备好之后，是否自动播放
         muted: false, // 是否静音
         loop: false, // 循环播放

@@ -61,7 +61,7 @@ export default class Recomd extends Vue{
         .videoPlayer{
             width: 100%;
             height: 100%;
-            pointer-events: none;
+            // pointer-events: none;
         }
     }
 }
