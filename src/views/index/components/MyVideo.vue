@@ -12,6 +12,7 @@ import { videoPlayer } from 'vue-video-player'
 })
 
 export default class MyVideo extends Vue{
+    @Prop() userEq: boolean|any //是否是pc
     @Prop() param: any //视频数据
     @Prop() swiperIndex: number|any //swiper的index
     @Prop() selfIndex: any //index
@@ -20,21 +21,21 @@ export default class MyVideo extends Vue{
     watchSwiperIndex(newVal: any, oldVal: any) {
         if (this.selfIndex === newVal) {
             this.myPlayer.play() //播放
-            this.isPlay = false
+            // this.isPlay = false
         }
     }
     constructor () {
         super()
         // this.send(this) //触发emit事件
-        if (this.selfIndex === 0) {
-            this.playerOptions.autoplay = true
-            this.isPlay = false
-        }
+        // if (this.selfIndex === 0) {
+        //     this.playerOptions.autoplay = true
+        //     this.isPlay = false
+        // }
     }
     // 播放器配置
     private playerOptions = {
         controls:false,//隐藏控制台
-        autoplay: false, // 播放器准备好之后，是否自动播放
+        autoplay: true, // 播放器准备好之后，是否自动播放
         muted: false, // 是否静音
         loop: false, // 循环播放
         fluid: true, // 是否适应父容器大小
@@ -44,6 +45,14 @@ export default class MyVideo extends Vue{
         }]
     }
     private isPlay: any = true //是否播放
+
+    created(){
+        // if (this.selfIndex === 0) {
+        //     this.playerOptions.autoplay = true
+        // } else if (!this.userEq) {
+        //     this.playerOptions.autoplay = true
+        // }   
+    }
 
     // 获取播放器实例
     get myPlayer () {
@@ -63,8 +72,8 @@ export default class MyVideo extends Vue{
     // 重置视频
     public reset() {
         // this.myPlayer.reset() //重置
-        this.myPlayer.pause()
-        this.isPlay = true
+        this.myPlayer.load() //重新加载视频
+        // this.playerOptions.autoplay = false
     }
    
 }

@@ -27,6 +27,10 @@ import Right from './Right.vue'
     }
 })
 export default class Recomd extends Vue{
+    constructor(){
+        super()
+    }
+    private userEq = true //是否是pc端
     // swiper配置
     private swiperOption = {
         direction:'vertical', //滑动方向
@@ -61,6 +65,11 @@ export default class Recomd extends Vue{
     // 点击屏幕 播放视频
     public videos (index: any) {
         (((this.$refs.videos as any)[index] as any) as any).$children[0].clickVideo()
+    }
+
+    // 判断客户端是否是pc端
+    public eqType(): boolean{
+        return /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
     }
 }
 </script>
