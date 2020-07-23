@@ -49,8 +49,8 @@ export default class Left extends Vue{
         margin-bottom: 0.2rem;
         text-align: center;
         .img{
-            max-width: 0.4rem;
-            max-height: 0.4rem;
+            max-width: 0.48rem;
+            max-height: 0.48rem;
             border-radius: 100%;
             
         }

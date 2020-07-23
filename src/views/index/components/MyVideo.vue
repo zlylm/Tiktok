@@ -14,15 +14,22 @@ import { videoPlayer } from 'vue-video-player'
 export default class MyVideo extends Vue{
     @Prop() param: any //视频数据
     @Prop() swiperIndex: number|any //swiper的index
-    @Prop() selfIndex: any //swiper的index
+    @Prop() selfIndex: any //index
     // @Emit('chuanThis') send(msg: any) {console.log(1)} // 执行父组件
     @Watch('swiperIndex')
     watchSwiperIndex(newVal: any, oldVal: any) {
-        console.log(newVal)
+        if (this.selfIndex === newVal) {
+            this.myPlayer.play() //播放
+            this.isPlay = false
+        }
     }
     constructor () {
         super()
         // this.send(this) //触发emit事件
+        if (this.selfIndex === 0) {
+            this.playerOptions.autoplay = true
+            this.isPlay = false
+        }
     }
     // 播放器配置
     private playerOptions = {
@@ -45,13 +52,19 @@ export default class MyVideo extends Vue{
 
     // 点击视频时触发
     public clickVideo () {
-       // this.myPlayer.reset() //重置
        if (this.isPlay) {
            this.myPlayer.play() //播放
        } else {
            this.myPlayer.pause() //暂停
        }
        this.isPlay = !this.isPlay
+    }
+
+    // 重置视频
+    public reset() {
+        // this.myPlayer.reset() //重置
+        this.myPlayer.pause()
+        this.isPlay = true
     }
    
 }

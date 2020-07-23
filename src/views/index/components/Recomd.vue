@@ -35,6 +35,15 @@ export default class Recomd extends Vue{
             tap: (event: any)=> {
                 this.videos(event.activeIndex)
             },
+            slidePrevTransitionEnd: (event: any)=> { //上一个
+                const v = (this.$refs.videos as any)
+                if (event.activeIndex+1 <= v.length) {
+                    ((v[event.activeIndex+1] as any) as any).$children[0].reset()
+                }
+            },
+            slideNextTransitionEnd: (event: any)=> { // 下一个
+                (((this.$refs.videos as any)[event.activeIndex-1] as any) as any).$children[0].reset()
+            }
         },
     }
     // 视频数据
