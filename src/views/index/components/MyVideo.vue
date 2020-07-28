@@ -20,7 +20,7 @@ export default class MyVideo extends Vue{
     @Watch('swiperIndex')
     watchSwiperIndex(newVal: any, oldVal: any) {
         if (this.selfIndex === newVal) {
-            this.myPlayer.play() //播放
+            //this.myPlayer.play() //播放
             // this.isPlay = false
         }
     }
