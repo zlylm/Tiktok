@@ -1,12 +1,13 @@
 <template>
     <div class="same-city">
         <div class="title" @click="showCity">厦门<span class="iconfont">&#xe604;</span></div>
-        <select-city v-if="isCity" @hideCity="hideCity"></select-city>
+        <select-city v-if="isCity" @hideCity="hideCity" :cityList="cityList"></select-city>
     </div>
 </template>
 <script lang="ts">
 import {Vue,Component} from 'vue-property-decorator'
 import SelectCity from './SelectCity.vue'
+import {getCity} from '@/api/city'
 
 @Component({
     name: 'City',
@@ -16,6 +17,15 @@ import SelectCity from './SelectCity.vue'
 })
 export default class City extends Vue{
     public isCity = false
+    private cityList = []
+
+    public mounted() {
+        getCity().then(res=>{
+            if (res) {
+                this.cityList = (res as any).data.city
+            }
+        })
+    }
 
     public showCity() {
         this.isCity = true

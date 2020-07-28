@@ -21,33 +21,42 @@
                 <div class="list">广州</div>
             </div>
         </div>
-        <div class="city-box" v-for="(item) in cityList" :key="item.initial">
-            <div class="city-key">{{item.initial}}</div>
-            <div class="city-values" v-for="(city,index) in item.list" :key="index">{{city.name}}</div>
+        <letter :letterList="letterList"></letter>
+        <div class="wrapper">
+            <div class="city-box" v-for="(item) in cityList" :key="item.initial">
+                <div class="city-key">{{item.initial}}</div>
+                <div class="city-values" v-for="(city,index) in item.list" :key="index">{{city.name}}</div>
+            </div>
         </div>
+        
     </div>
 </template>
 <script lang="ts">
-import {Vue,Component,Emit} from 'vue-property-decorator'
-import {getCity} from '@/api/city'
+import {Vue,Component,Emit,Prop} from 'vue-property-decorator'
+import Letter from './Letter.vue'
+import BScroll from 'better-scroll'
+
 
 @Component({
-    name: 'SelectCity'
+    name: 'SelectCity',
+    components: {
+        Letter
+    }
 })
 export default class SelectCity extends Vue{
-    private cityList = []
-
-    public mounted() {
-        getCity().then(res=>{
-            if (res) {
-                this.cityList = (res as any).data.city
-            }
-        })
-    }
-
+    private letterList = [] //字母表
+    @Prop() cityList
     @Emit('hideCity')
     public hideCity(){
        console.log('关闭窗口')
+    }
+
+    public mounted(){
+        const result = []
+        this.cityList.forEach(item=>{
+            result.push(item.initial)
+        })
+        this.letterList = result
     }
 }
 </script>
