@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const GlobalUrl = 'https://www.easy-mock.com/mock/5f1fcb0a74a4ec373ea6ae37/tiktok'
-// const GlobalUrl = 'http://localhost:54073/'
+// const GlobalUrl = 'https://www.easy-mock.com/mock/5f1fcb0a74a4ec373ea6ae37/tiktok'
+const GlobalUrl = 'http://localhost:2020/'
 
 const config = {
     baseURL: GlobalUrl,

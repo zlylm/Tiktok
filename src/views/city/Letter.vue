@@ -1,15 +1,24 @@
 <template>
     <div class="letter">
-        <div class="list" v-for="item of letterList" :key="item">{{item}}</div>
+        <div class="list" v-for="item of letterList" :key="item" @click="clickLetter(item)">{{item}}</div>
     </div>
 </template>
 <script lang="ts">
-import {Vue,Component,Prop} from 'vue-property-decorator'
+import {Vue,Component,Prop,Emit} from 'vue-property-decorator'
 @Component({
     name: 'Letter'
 })
 export default class Letter extends Vue{
     @Prop() letterList
+
+    /**
+     * 字母点击
+     */
+    @Emit('letterClick')
+    public clickLetter(name) {
+        return name
+    }
+    
 }
 </script>
 <style lang="less" scoped>

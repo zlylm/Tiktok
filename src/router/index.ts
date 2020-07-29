@@ -21,7 +21,12 @@ Vue.use(VueRouter)
           {path: 'follow', name:'Follow', component: ()=> import('@/views/index/components/Follow.vue')},
         ]
       },
-      {path: '/city', name:'City', component: ()=> import('@/views/city/index.vue')},
+      { 
+        path: '/city', 
+        name:'City', 
+        component: ()=> import('@/views/city/index.vue')
+      },
+      {path: '/citysel', name:'citysel', component: ()=> import('@/views/city/SelectCity.vue')},
       {path: '/message', name:'Message', component: ()=> import('@/views/message/index.vue')},
       {path: '/me', name:'Me', component: ()=> import('@/views/me/index.vue')},
     ]

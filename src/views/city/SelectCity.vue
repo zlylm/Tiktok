@@ -1,5 +1,5 @@
 <template>
-    <div class="sel-city">
+    <div class="sel-city" ref="wrapper">
         <div class="header">
             <span class="iconfont" @click="hideCity">&#xe606;</span>
             切换城市
@@ -21,18 +21,19 @@
                 <div class="list">广州</div>
             </div>
         </div>
-        <letter :letterList="letterList"></letter>
-        <div class="wrapper">
-            <div class="city-box" v-for="(item) in cityList" :key="item.initial">
-                <div class="city-key">{{item.initial}}</div>
-                <div class="city-values" v-for="(city,index) in item.list" :key="index">{{city.name}}</div>
-            </div>
+        <letter :letterList="letterList" @letterClick="letterClick"></letter>
+        
+        <div class="city-box" v-for="(item) in cityList" :key="item.initial">
+            <div :class="['city-key',item.initial]" :ref="item.initial">{{item.initial}}</div>
+            <div class="city-values" v-for="(city,index) in item.list" :key="index">{{city.name}}</div>
         </div>
+       
         
     </div>
 </template>
 <script lang="ts">
 import {Vue,Component,Emit,Prop} from 'vue-property-decorator'
+import {getCity} from '@/api/city'
 import Letter from './Letter.vue'
 import BScroll from 'better-scroll'
 
@@ -44,19 +45,48 @@ import BScroll from 'better-scroll'
     }
 })
 export default class SelectCity extends Vue{
-    private letterList = [] //字母表
-    @Prop() cityList
+    private letterList = []; //字母表
+    private cityList = [];//城市
+    private scroll = null;
     @Emit('hideCity')
     public hideCity(){
        console.log('关闭窗口')
     }
 
     public mounted(){
+        getCity().then(res=>{
+            if (res) {
+                this.cityList = (res as any).data.city
+                this.showLetter()
+            }
+        })
+    }
+
+    /**
+     * 处理字母
+     */
+    public showLetter() {
         const result = []
         this.cityList.forEach(item=>{
             result.push(item.initial)
         })
         this.letterList = result
+        this.scroll = new BScroll(this.$refs.wrapper,{
+            click: true,
+            tap: true,
+            scrollX: true,
+            scrollY: false,
+        })
+    }
+
+    /**
+     * 接收子组件 字母点击
+     */
+    public letterClick(name) {
+        
+        const ele = this.$refs[name][0]
+        this.scroll.scrollToElement(ele)
+        console.log(this.scroll.scrollToElement)
     }
 }
 </script>
@@ -64,16 +94,17 @@ export default class SelectCity extends Vue{
 @myColor: rgba(255, 255, 255, 0.6);
 @solidColor: rgba(255, 255, 255, 0.15);
 .sel-city{
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 99;
+    // position: fixed;
+    // width: 100%;
+    // height: 100%;
+    // top: 0;
+    // left: 0;
+    // z-index: 2;
     background-color: @bgColor;
     color: @myColor;
+    height: auto;
     padding: 0 0.1rem;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     .header{
         font-size: 0.16rem;
         font-weight: 500;
